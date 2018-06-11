@@ -1,5 +1,7 @@
 # Instructions
 
+These are instructions to build the pokecrystal dissasembly inside a virtual machine, so the installation doesn't change our main operative system.
+
 ## Installing the virtual machine
 
 Download Virtualbox from https://www.virtualbox.org
@@ -62,7 +64,7 @@ make
 
 ## Editing files
 
-Create a folder, called pokecrystal, in your guest system.
+Create a folder, called pokecrystal, in your Host system.
 
 Install Atom: https://atom.io
 
@@ -113,7 +115,9 @@ All the files and folders will be synced to your pokecrystal folder in your gues
 
 ## Testing your changes
 
-When you want to test the changes, return to the terminal. Make sure you're in the pokecrystal directory:
+Everytime you need to test your changes, go to your pokecrystal folder on the Host system. Delete the file pokecrystal.gbc.
+
+Now, return to the terminal. Make sure you're in the pokecrystal directory:
 
 ```bash
 cd /home/username-of-virtualmachine/pokecrystal
@@ -124,3 +128,7 @@ And then:
 ```bash
 make
 ```
+Now go to Atom, and under 'Remote', right click and select Sync local <- remote. This will bring a new pokecrystal.gbc to your Host pokecrystal folder.
+
+Now, open the pokecrystal.gbc inside the folder using any GameBoy emulator, like VisualBoyAdvance: https://sourceforge.net/projects/vba/.
+
