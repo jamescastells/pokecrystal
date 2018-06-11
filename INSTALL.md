@@ -62,9 +62,13 @@ make
 
 ## Editing files
 
+Create a folder, called pokecrystal, in your guest system.
+
 Install Atom: https://atom.io
 
-Open it, and then go to Preferences. Click on Install, and search for the package remote-ftp. Install it.
+Open it, and go to File->Open. Select the pokecrystal folder recently created, and click in Open. The folder will be displayed in the left panel.
+
+Now go to Preferences. Click on Install, and search for the package remote-ftp. Install it.
 
 Under the Packages menu, click on Remote FTP, and click on Toogle.
 
@@ -102,3 +106,21 @@ Replace username-of-virtualmachine and password-of-virtualmachine with their res
 Click on Connect.
 
 The sidebar will show the files inside the virtual machine.
+
+Right click on "127.0.0.1" below the "Remote" tab, and select Sync local <- remote.
+
+All the files and folders will be synced to your pokecrystal folder in your guest system. Now, click the "Project" tab, and edit your files from there. Every time you save a file, it will be synced to the virtual machine.
+
+## Testing your changes
+
+When you want to test the changes, return to the terminal. Make sure you're in the pokecrystal directory:
+
+```bash
+cd /home/username-of-virtualmachine/pokecrystal
+```
+
+And then:
+
+```bash
+make
+```
