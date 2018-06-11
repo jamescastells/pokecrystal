@@ -101,4 +101,4 @@ Replace username-of-virtualmachine and password-of-virtualmachine with their res
 
 Click on Connect.
 
-The sidebar will show the files inside the virtualmachine.
+The sidebar will show the files inside the virtual machine.
