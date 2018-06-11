@@ -77,7 +77,7 @@ In the new sidebar, click "Edit configuration", and on the blank file that appea
     "user": "username-of-virtualmachine", // string - Username for authentication. Default: (none)
     "pass": "password-of-virtualmachine", // string - Password for password-based user authentication. Default: (none)
     "promptForPass": false, // boolean - Set to true for enable password/passphrase dialog. This will prevent from using cleartext password/passphrase in this config. Default: false
-    "remote": "/", // try to use absolute paths starting with /
+    "remote": "/home/username-of-virtualmachine/pokecrystal", // try to use absolute paths starting with /
     "agent": "", // string - Path to ssh-agent's UNIX socket for ssh-agent-based user authentication. Linux/Mac users can set "env" as a value to use env SSH_AUTH_SOCK variable. Windows users: set to 'pageant' for authenticating with Pageant or (actual) path to a cygwin "UNIX socket." Default: (none)
     "privatekey": "", // string - Absolute path to the private key file (in OpenSSH format). Default: (none)
     "passphrase": "", // string - For an encrypted private key, this is the passphrase used to decrypt it. Default: (none)
@@ -101,4 +101,4 @@ Replace username-of-virtualmachine and password-of-virtualmachine with their res
 
 Click on Connect.
 
-The sidebar will show the files inside the virtualmachine. The files you need to edit are on /home/username-of-virtualmachine/pokecrystal.
+The sidebar will show the files inside the virtualmachine.
