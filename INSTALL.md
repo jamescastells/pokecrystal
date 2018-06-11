@@ -1,84 +1,54 @@
 # Instructions
 
-The source files are assembled into a ROM using [**rgbds**](https://github.com/rednex/rgbds).
-These instructions explain how to set up the tools required to build.
+## Installing the virtual machine
 
-If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
+Download Virtualbox from https://www.virtualbox.org
+Download Ubuntu server from https://www.ubuntu.com/download/server
 
+Create a virtual machine and install Ubuntu.
 
-## Linux
+Once installed, login into the virtual machine and run:
+
+sudo apt-get install openssh-server
+
+Once installed, run
+
+shutdown now
+
+## Granting access
+
+In Virtualbox, select the virtual machine and click Settings. In "Network", click "Advanced" and then "Port forwarding".
+
+Click the "+" to create a new rule. Under Host port, write 3022, and on the right, under Guest Port, write 22. Accept all the dialogs.
+
+In the main window, click on the arrow next to "Start" and select "Headless start". The virtual machine will now display "Running".
+
+On your host system, make sure you have SSH installed. Open a terminal and write:
+
+ssh -p 3022 username-of-ubuntu@127.0.0.1
+
+Replace username-of-ubuntu with the actual username.
+
+Answer "yes" when the warning appears.
+
+Write the virtual machine's password, and you'll be in.
+
+## Installing dependencies
+
+Write the following commands:
 
 ```bash
-sudo apt-get install make gcc bison git libpng-dev
-
+sudo apt-get install make gcc bison git flex pkg-config libpng-dev
 git clone https://github.com/rednex/rgbds
 cd rgbds
 sudo make install
 cd ..
-
-git clone https://github.com/pret/pokecrystal
-cd pokecrystal
 ```
 
-To build **pokecrystal.gbc**:
-
-```bash
-make
-```
-
-
-## Mac
-
-In **Terminal**, run:
-
-```bash
-xcode-select --install
-
-git clone https://github.com/rednex/rgbds
-cd rgbds
-sudo make install
-cd ..
-
-git clone https://github.com/pret/pokecrystal
-cd pokecrystal
-```
-
-To build **pokecrystal.gbc**:
-
-```bash
-make
-```
-
-
-## Windows
-
-Download [**Cygwin**](http://cygwin.com/install.html): **setup-x86_64.exe** for 64-bit Windows, **setup-x86.exe** for 32-bit.
-
-Run setup and leave the default settings. At "Select Packages", choose to install the following:
-
-- `make`
-- `git`
-- `gcc-core`
-
-Then download [**rgbds**](https://github.com/rednex/rgbds/releases/): the latest **win64.tar.gz** or **win32.tar.gz** release. Extract it and put all the `exe` and `dll` files individually in **C:\Cygwin64\usr\local\bin**.
-
-**Note: If you have an older rgbds, you will need to update to 0.3.3 or newer.** Ignore this if you have never installed rgbds before.
-
-In the **Cygwin terminal**, enter these commands:
+## Installing the source code
 
 ```bash
 git clone https://github.com/pret/pokecrystal
 cd pokecrystal
-```
-
-To build **pokecrystal.gbc**:
-
-```bash
 make
-```
-
-To build **pokecrystal11.gbc**:
-
-```bash
-make crystal11
 ```
