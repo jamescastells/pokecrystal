@@ -98,3 +98,7 @@ In the new sidebar, click "Edit configuration", and on the blank file that appea
 ```
 
 Replace username-of-virtualmachine and password-of-virtualmachine with their respective counterparts.
+
+Click on Connect.
+
+The sidebar will show the files inside the virtualmachine. The files you need to edit are on /home/username-of-virtualmachine/pokecrystal.
