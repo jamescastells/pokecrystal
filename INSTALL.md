@@ -33,10 +33,10 @@ In the main window, click on the arrow next to "Start" and select "Headless star
 On your host system, make sure you have SSH installed. Open a terminal and write:
 
 ```bash
-ssh -p 3022 username-of-ubuntu@127.0.0.1
+ssh -p 3022 username-of-virtualmachine@127.0.0.1
 ```
 
-Replace username-of-ubuntu with the actual username.
+Replace username-of-virtualmachine with the actual username.
 
 Answer "yes" when the warning appears.
 
@@ -126,7 +126,7 @@ Open it, and go to File->Open. Select the pokecrystal folder recently created, a
 
 ## Testing your changes
 
-Everytime you need to test your changes, you need to build the rom inside the sf_pokecrystal of your virtual machine. To do so, in the terminal, once you're logged in the virtual machine, type:
+Everytime you need to test your changes, you need to build the rom inside the sf_pokecrystal of your virtual machine. To do so, the virtual machine must be started ('headless start'), and in the terminal, once you're logged in the virtual machine, type:
 
 ```bash
 cd /media/sf_pokecrystal
