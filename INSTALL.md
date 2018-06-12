@@ -104,7 +104,7 @@ To make effect, you have to restart the virtual machine, so type:
 sudo reboot
 ```
 
-The virtual machine will disconect. After a little while, you can login again, so type:
+The virtual machine will disconnect. After a little while, you can login again, so type:
 
 ```bash
 ssh -p 3022 username-of-ubuntu@127.0.0.1
