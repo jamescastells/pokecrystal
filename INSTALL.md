@@ -47,7 +47,7 @@ Write the virtual machine's password, and you'll be in.
 Write the following commands:
 
 ```bash
-sudo apt-get install make gcc bison git flex pkg-config libpng-dev
+sudo apt-get install make gcc bison git flex pkg-config libpng-dev virtualbox-guest-x11
 git clone https://github.com/rednex/rgbds
 cd rgbds
 sudo make install
@@ -62,73 +62,75 @@ cd pokecrystal
 make
 ```
 
-## Editing files
+## Accesing the files
+
+In the terminal, type the next command to turn the virtual machine off:
+
+```bash
+sudo shutdown now
+```
 
 Create a folder, called pokecrystal, in your Host system.
 
-Install Atom: https://atom.io
+Now go to the main Virtual Box window, and select your virtual machine, and click in Settings. Click Shared folders.
 
-Open it, and go to File->Open. Select the pokecrystal folder recently created, and click in Open. The folder will be displayed in the left panel.
+Click the "plus" button. In the new window, in "Folder path", click the arrow and select "other". Navigate to the pokecrystal folder created in the host system, and inside the folder, click "Open". In "Folder name", leave "pokecrystal". Check Auto-mount, and then click Ok in all the windows. This will create a shared folder between the host and the guest.
 
-Now go to Preferences. Click on Install, and search for the package remote-ftp. Install it.
+Select the virtual machine and click on Start->Headless start again.
 
-Under the Packages menu, click on Remote FTP, and click on Toogle.
+Open the terminal again, and login to the virtual machine, with the command:
 
-In the new sidebar, click "Edit configuration", and on the blank file that appears on the right (".ftpconfig"), paste the following text:
 ```bash
-{
-    "protocol": "sftp",
-    "host": "127.0.0.1", // string - Hostname or IP address of the server. Default: 'localhost'
-    "port": 3022, // integer - Port number of the server. Default: 22
-    "user": "username-of-virtualmachine", // string - Username for authentication. Default: (none)
-    "pass": "password-of-virtualmachine", // string - Password for password-based user authentication. Default: (none)
-    "promptForPass": false, // boolean - Set to true for enable password/passphrase dialog. This will prevent from using cleartext password/passphrase in this config. Default: false
-    "remote": "/home/username-of-virtualmachine/pokecrystal", // try to use absolute paths starting with /
-    "agent": "", // string - Path to ssh-agent's UNIX socket for ssh-agent-based user authentication. Linux/Mac users can set "env" as a value to use env SSH_AUTH_SOCK variable. Windows users: set to 'pageant' for authenticating with Pageant or (actual) path to a cygwin "UNIX socket." Default: (none)
-    "privatekey": "", // string - Absolute path to the private key file (in OpenSSH format). Default: (none)
-    "passphrase": "", // string - For an encrypted private key, this is the passphrase used to decrypt it. Default: (none)
-    "hosthash": "", // string - 'md5' or 'sha1'. The host's key is hashed using this method and passed to the hostVerifier function. Default: (none)
-    "ignorehost": true,
-    "connTimeout": 10000, // integer - How long (in milliseconds) to wait for the SSH handshake to complete. Default: 10000
-    "keepalive": 10000, // integer - How often (in milliseconds) to send SSH-level keepalive packets to the server (in a similar way as OpenSSH's ServerAliveInterval config option). Set to 0 to disable. Default: 10000
-    "keyboardInteractive": false, // boolean - Set to true for enable verifyCode dialog. Keyboard interaction authentication mechanism. For example using Google Authentication (Multi factor)
-    "keyboardInteractiveForPass": false, // boolean - Set to true for enable keyboard interaction and use pass options for password. No open dialog.
-    "watch":[ // array - Paths to files, directories, or glob patterns that are watched and when edited outside of the atom editor are uploaded. Default : []
-        "./dist/stylesheets/main.css", // reference from the root of the project.
-        "./dist/stylesheets/",
-        "./dist/stylesheets/*.css"
-    ],
-    "watchTimeout":500, // integer - The duration ( in milliseconds ) from when the file was last changed for the upload to begin.
-    "filePermissions":"0644" // string - Permissions for uploaded files. WARNING: if this option is set, previously set permissions on the remote are overwritten!
-}
+ssh -p 3022 username-of-ubuntu@127.0.0.1
 ```
 
-Replace username-of-virtualmachine and password-of-virtualmachine with their respective counterparts.
+After you login, we have to make sure that the shared folder was correctly created. Type:
 
-Click on Connect.
+```bash
+ls /media/
+```
 
-The sidebar will show the files inside the virtual machine.
+If a folder "sf_pokecrystal" is listed, it was correctly created. If not, check the previous steps.
 
-Right click on "127.0.0.1" below the "Remote" tab, and select Sync local <- remote.
+Now you have to grant access to the user of the virtual machine to this folder:
 
-All the files and folders will be synced to your pokecrystal folder in your guest system. Now, click the "Project" tab, and edit your files from there. Every time you save a file, it will be synced to the virtual machine.
+```bash
+sudo usermod -a -G vboxsf username-of-virtualmachine
+```
+
+To make effect, you have to restart the virtual machine, so type:
+
+```bash
+sudo reboot
+```
+
+The virtual machine will disconect. After a little while, you can login again, so type:
+
+```bash
+ssh -p 3022 username-of-ubuntu@127.0.0.1
+```
+
+Now we want to copy all the files from the pokecrystal directory inside our virtual machine, to the shared folder. To do so:
+
+```bash
+cp -a pokecrystal/. /media/sf_pokecrystal/
+```
+
+You will see all of the files in the pokecrystal folder on your host system.
+
+## Editing the files.
+
+Install Atom: https://atom.io
+
+Open it, and go to File->Open. Select the pokecrystal folder recently created, and click in Open. The folder will be displayed in the left panel. You can freely edit the files, and those will be synced with the virtual machine.
 
 ## Testing your changes
 
-Everytime you need to test your changes, go to your pokecrystal folder on the Host system. Delete the file pokecrystal.gbc.
-
-Now, return to the terminal. Make sure you're in the pokecrystal directory:
+Everytime you need to test your changes, you need to build the rom inside the sf_pokecrystal of your virtual machine. To do so, in the terminal, once you're logged in the virtual machine, type:
 
 ```bash
-cd /home/username-of-virtualmachine/pokecrystal
-```
-
-And then:
-
-```bash
+cd /media/sf_pokecrystal
 make
 ```
-Now go to Atom, and under 'Remote', right click and select Sync local <- remote. This will bring a new pokecrystal.gbc to your Host pokecrystal folder.
 
-Now, open the pokecrystal.gbc inside the folder using any GameBoy emulator, like VisualBoyAdvance: https://sourceforge.net/projects/vba/.
-
+Now, open the pokecrystal.gbc inside the pokecrystal folder using any GameBoy emulator, like VisualBoyAdvance: https://sourceforge.net/projects/vba/.
