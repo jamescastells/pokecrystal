@@ -118,7 +118,7 @@ cp -a pokecrystal/. /media/sf_pokecrystal/
 
 You will see all of the files in the pokecrystal folder on your host system.
 
-## Editing the files.
+## Editing the files
 
 Install Atom: https://atom.io
 
