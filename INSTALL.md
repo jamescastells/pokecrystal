@@ -81,7 +81,7 @@ Select the virtual machine and click on Start->Headless start again.
 Open the terminal again, and login to the virtual machine, with the command:
 
 ```bash
-ssh -p 3022 username-of-ubuntu@127.0.0.1
+ssh -p 3022 username-of-virtualmachine@127.0.0.1
 ```
 
 After you login, we have to make sure that the shared folder was correctly created. Type:
@@ -107,7 +107,7 @@ sudo reboot
 The virtual machine will disconnect. After a little while, you can login again, so type:
 
 ```bash
-ssh -p 3022 username-of-ubuntu@127.0.0.1
+ssh -p 3022 username-of-virtualmachine@127.0.0.1
 ```
 
 Now we want to copy all the files from the pokecrystal directory inside our virtual machine, to the shared folder. To do so:
